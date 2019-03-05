@@ -1,18 +1,26 @@
-import React, { Component } from 'react';
-import ProTypes from 'prop-types';
+import React, { Component } from 'react'
 
-class Todolist extends Component {
-	  render() {
-	    return (
-	      <div className="todoListMain">
-	        <div className="header">
-	          <form>
-	            <input placeholder="Task" />
-	            <button type="submit"> Add Task </button>
-	          </form>
-	        </div>
-	      </div>
-	    )
-	  }
-	}
-export default Todolist;
+class TodoList extends Component {
+  componentDidUpdate() {
+    this.props.inputElement.current.focus()
+  }
+  render() {
+    return (
+      <div className="todoListMain">
+        <div className="header">
+          <form onSubmit={this.props.addItem}>
+            <input
+              placeholder="Task"
+              ref={this.props.inputElement}
+              value={this.props.currentItem.text}
+              onChange={this.props.handleInput}
+            />
+            <button type="submit"> Add Task </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default TodoList
